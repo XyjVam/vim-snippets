@@ -1,38 +1,41 @@
 extends c
 
 ###########################################################################
-#                            TextMate Snippets                            #
+#														 TextMate Snippets														#
 ###########################################################################
 snippet beginend "$1.begin(), $1.end() (beginend)"
 ${1:v}${1/^.*?(-)?(>)?$/(?2::(?1:>:.))/}begin(), $1${1/^.*?(-)?(>)?$/(?2::(?1:>:.))/}end()
 endsnippet
 
 snippet cl "class .. (class)"
-class ${1:`!p snip.rv = snip.basename or "name"`} {
-public:
-    ${1/(\w+).*/$1/} (${2:arguments}) 
-    {
-    }
-    virtual ~${1/(\w+).*/$1/} () {}
+class ${1:`!p snip.rv = snip.basename or "name"`}
+{
+	public:
+		${1/(\w+).*/$1/} (${2:arguments}) 
+		{
+		}
+		virtual ~${1/(\w+).*/$1/} () {}
 
-private:
-    ${0:/* data */}
+	private:
+		${0:/* data */}
 };
 endsnippet
 
 snippet ns "namespace .. (namespace)"
-namespace${1/.+/ /m}${1:`!p snip.rv = snip.basename or "name"`} {
-    ${VISUAL}${0:${VISUAL/(.*)/(?1::\/* code *\/)/}}
+namespace${1/.+/ /m}${1:`!p snip.rv = snip.basename or "name"`}
+{
+	${VISUAL}${0:${VISUAL/(.*)/(?1::\/* code *\/)/}}
 }${1/.+/ \/* /m}$1${1/.+/ *\/ /m}
 endsnippet
 
 snippet readfile "read file (readF)"
 std::vector<char> v;
-if (FILE *fp = fopen(${1:"filename"}, "r")) {
-    char buf[1024];
-    while(size_t len = fread(buf, 1, sizeof(buf), fp))
-	    v.insert(v.end(), buf, buf + len);
-    fclose(fp);
+if (FILE *fp = fopen(${1:"filename"}, "r"))
+{
+	char buf[1024];
+	while(size_t len = fread(buf, 1, sizeof(buf), fp))
+		v.insert(v.end(), buf, buf + len);
+	fclose(fp);
 }
 endsnippet
 
@@ -57,7 +60,7 @@ ${2:int} ${1:array}[${3:100}];
 endsnippet
 
 snippet lam "lambda" 
-[${1:}](${2:auto a}){ return ${3:}; }
+[${1:}](${2:auto&& a}){ return ${3:}; }
 endsnippet
 
 snippet asy "async task" 
@@ -77,8 +80,9 @@ using ${1:Namespace}::${2:var};
 endsnippet
 
 snippet enum "strongly typed enumerations" 
-enum class ${1:Enumeration} {
-    $2
+enum class ${1:Enumeration}
+{
+	$2
 };
 endsnippet
 
@@ -182,11 +186,11 @@ snippet make_unique_declare "make unique with declare"
 auto ${2:up} = make_unique(${1:ctor_args});
 endsnippet
 
-snippet sp  "shared pointer" 
+snippet sp	"shared pointer" 
 shared_ptr<${1:int}> ${2:name};
 endsnippet
 
-snippet pa  "pair" 
+snippet pa	"pair" 
 std::pair<${1:int},${2:int}> ${3:name};
 endsnippet
 
@@ -196,17 +200,17 @@ endsnippet
 
 snippet forit "for with iterators" 
 for( auto ${2:i} = begin($1), ${3:e} = end(${1:container}); $2 != $3; ++$2 ){
-    $4
+		$4
 }
 endsnippet
 
 snippet forp "upcounting for" 
 for( auto ${3:i} = ${1:from} ; $3 < ${2:to} ; ++$3 ){
-    $4
+		$4
 }
 endsnippet
 
-snippet accumulate  "algorithm accumulate" 
+snippet accumulate	"algorithm accumulate" 
 std::accumulate( begin(${2:container}), end($2), ${3:0} )
 endsnippet
 
@@ -244,16 +248,16 @@ endsnippet
 
 snippet copy "copy algorithm" 
 std::copy( begin(${1:container}),
-    end($1),
-    begin(${2:destination_container})
+		end($1),
+		begin(${2:destination_container})
 );
 endsnippet
 
 snippet copytostream "writes the elements of the container to stream" 
 // writes the elements of container $1 to stream $4
 std::copy( begin(${1:container}),
-    end($1), 
-    ${2:std::ostream_iterator<${3:type}>(${4:std::cout}, "\n")} 
+	end($1), 
+	${2:std::ostream_iterator<${3:type}>(${4:std::cout}, "\n")} 
 );
 endsnippet
 
@@ -263,9 +267,9 @@ endsnippet
 
 snippet transform "algorithm transform" 
 std::transform( begin(${1:container}), 
-    end($1), 
-    begin($1), 
-    []( auto element ){ return ${2:element}; } 
+	end($1), 
+	begin($1), 
+	[]( auto element ){ return ${2:element}; } 
 );
 endsnippet
 
@@ -273,13 +277,13 @@ snippet fill "algorithm fill "
 std::fill( begin(${1:container}), end($1), ${2:value} );
 endsnippet
 
-snippet find  "algorithm find " 
+snippet find	"algorithm find " 
 std::find( begin(${1:container}), end($1), ${2:value} )
 endsnippet
 
 snippet find_if "if with find in it " 
-if ( find(begin(${1:container}), end($1), ${2:value} ) != end($1) ){
-
+if ( find(begin(${1:container}), end($1), ${2:value} ) != end($1) )
+{
 }
 endsnippet
 
@@ -325,31 +329,32 @@ decltype( ${1:} ) ${2:name};
 endsnippet
 
 snippet operator "operatoroverload" 
-${1:auto&} operator${2:+}( const ${3:$1}& rhs ){
-    return ;
+${1:auto&} operator${2:+}( const ${3:$1}& rhs )
+{
+		return ;
 }
 endsnippet
 
 
 snippet switch "switch case" 
 switch(${1:}){
-    case ${2:}: {
+		case ${2:}: {
 
-        break;
-    }
-    case ${3:}: {
+				break;
+		}
+		case ${3:}: {
 
-        break;
-    }
-    default:
-        assert(0);
+				break;
+		}
+		default:
+				assert(0);
 }
 endsnippet
 
-snippet case  "case of a switch" 
+snippet case	"case of a switch" 
 case ${1:} :{
-    $2
-    break;
+		$2
+		break;
 }
 endsnippet
 
@@ -374,18 +379,18 @@ snippet ifstreamtocontainer "reads a file to a container"
 // reads the file $2 into the container $3
 ifstream ${1:in}(${2:"infile.dat"});
 
-std::copy(  istream_iterator<${4:type}>($1),
-	    istream_iterator<$4>(),
-	    std::inserter(${3:container},end($3))
+std::copy(	istream_iterator<${4:type}>($1),
+			istream_iterator<$4>(),
+			std::inserter(${3:container},end($3))
 );
 endsnippet
 
 snippet set_symmetric_difference "computes the symmetric difference of to containers" 
 // computes the symmetric difference of $1 and $2 and stores result to $3
 std::set_symmetric_difference(
-    begin(${1:container1}), end($1),
-    begin(${2:container2}), end($2),
-    std::inserter(${3:destination_container}, end($3))
+		begin(${1:container1}), end($1),
+		begin(${2:container2}), end($2),
+		std::inserter(${3:destination_container}, end($3))
 );
 endsnippet
 
@@ -396,36 +401,36 @@ endsnippet
 snippet merge "merges to sorted ranges" 
 // merges $1 and $2 and stores result to $3
 std::merge(
-    begin(${1:container1}), end($1),
-    begin(${2:container2}), end($2),
-    std::back_inserter(${3:destination_container})
+		begin(${1:container1}), end($1),
+		begin(${2:container2}), end($2),
+		std::back_inserter(${3:destination_container})
 );
 endsnippet
 
 snippet intersect "computes the intersection of two sets" 
 // computes the intersection of $1 and $2 and stores result to $3
 std::set_intersection(
-    begin(${1:container1}), end($1),
-    begin(${2:container2}), end($2),
-    std::back_inserter(${3:destination_container})
+		begin(${1:container1}), end($1),
+		begin(${2:container2}), end($2),
+		std::back_inserter(${3:destination_container})
 );
 endsnippet
 
 snippet difference "computes the intersection of two sets" 
 // computes the difference of $1 and $2 and stores result to $3
 std::set_difference(
-    begin(${1:container1}), end($1),
-    begin(${2:container2}), end($2),
-    std::back_inserter(${3:destination_container})
+		begin(${1:container1}), end($1),
+		begin(${2:container2}), end($2),
+		std::back_inserter(${3:destination_container})
 );
 endsnippet
 
 snippet union "computes the union of two sets" 
 // computes the union of $1 and $2 and stores result to $3
 std::set_union(
-    begin(${1:container1}), end($1),
-    begin(${2:container2}), end($2),
-    std::back_inserter(${3:destination_container})
+		begin(${1:container1}), end($1),
+		begin(${2:container2}), end($2),
+		std::back_inserter(${3:destination_container})
 );
 endsnippet
 
@@ -441,9 +446,9 @@ snippet remove_copy_if "copys elements to other container omitting elements"
 // filters all elements in $1 that satisfy the criteria
 // and inserts them into $2
 std::remove_copy_if(begin(${1:container}), 
-    end($1), 
-    std::back_inserter(${2:destination_container}),
-    [](auto element){ return ${3:true};} 
+		end($1), 
+		std::back_inserter(${2:destination_container}),
+		[](auto element){ return ${3:true};} 
 );
 endsnippet
 
@@ -451,10 +456,10 @@ snippet replace_copy_if "replaces all elements that satisfy the criteria"
 // replaces all elements in $1 with $4 that satisfy the criteria 
 // and fills them into $2
 std::replace_copy_if(begin(${1:container}), 
-    end($1), 
-    std::back_inserter(${2:destination_container}),
-    [](auto element){ return ${3:true};},
-    ${4:"replacement"}
+		end($1), 
+		std::back_inserter(${2:destination_container}),
+		[](auto element){ return ${3:true};},
+		${4:"replacement"}
 );
 endsnippet
 
@@ -464,9 +469,9 @@ endsnippet
 
 snippet unique_copy "removes dublicates and copies to other container" 
 std::unique_copy( 
-    begin(${1:container}), 
-    end($1), 
-    std::back_inserter(${2:other_container}) 
+		begin(${1:container}), 
+		end($1), 
+		std::back_inserter(${2:other_container}) 
 );
 endsnippet
 
@@ -476,10 +481,10 @@ endsnippet
 
 snippet inner_product "inner_product or dot product"
 std::inner_product( 
-    begin(${1:container}), 
-    end($1), 
-    begin(${2:container2}), 
-    ${3:0.0}
+		begin(${1:container}), 
+		end($1), 
+		begin(${2:container2}), 
+		${3:0.0}
 )
 endsnippet
 
@@ -489,28 +494,28 @@ endsnippet
 
 snippet fung "general function"
 ${1:type} ${2:function_name}(${3:int arg1}){
-    ${VISUAL}${0:${VISUAL/(.*)/(?1::\/* code *\/)/}}
-    return ${4:0};
+		${VISUAL}${0:${VISUAL/(.*)/(?1::\/* code *\/)/}}
+		return ${4:0};
 }
 endsnippet
 
 snippet funv "function returning void"
 void ${1:function_name}(${2:int arg1}){
-    ${VISUAL}${0:${VISUAL/(.*)/(?1::\/* code *\/)/}}
+		${VISUAL}${0:${VISUAL/(.*)/(?1::\/* code *\/)/}}
 }
 endsnippet
 
 snippet funa "function" b
 auto ${1:function_name}(${2}) {
-    ${VISUAL}${0:${VISUAL/(.*)/(?1::\/* code *\/)/}}
-    return ${3:0};
+		${VISUAL}${0:${VISUAL/(.*)/(?1::\/* code *\/)/}}
+		return ${3:0};
 }
 endsnippet
 
 snippet tfuna "template function "
 template < typename ${1:T} >
 auto ${2:function_name}( ${3:$1 arg1} ){
-    return 0;
+		return 0;
 }
 endsnippet
 
@@ -526,15 +531,15 @@ endsnippet
 
 snippet erase "erase remove idiom for vector family" 
 ${1:container}.erase(
-    remove_if(	begin($1), 
+		remove_if(	begin($1), 
 		end($1), 
 		${2:[]( auto element )
 		{ 
-		    return element > 0; 
+				return element > 0; 
 		}
 		}
-	    ),
-	    end($1)
+			),
+			end($1)
 )
 endsnippet
 
@@ -555,34 +560,50 @@ bool c_set = false;
 
 // parse all switches
 while ( int opt = getopt(argc, argv, "a:c") ){
-    if ( opt == -1 ) break;
-    switch(opt) {
+		if ( opt == -1 ) break;
+		switch(opt) {
 	case 'a':{
-	    a_string = optarg;
-	    break;
+			a_string = optarg;
+			break;
 	}
 	case 'c':{
-	    c_set = true;
-	    break;
+			c_set = true;
+			break;
 	}
 	default:{
-	    fprintf(stderr, "Usage: %s \n",argv[0]);
-	    exit(EXIT_FAILURE);
+			fprintf(stderr, "Usage: %s \n",argv[0]);
+			exit(EXIT_FAILURE);
 	}
-    }
+		}
 }
 // parse all non-option arguments
 for( ; optind < argc ; optind++){
-    std::cout << argv[optind] << std::endl;
+		std::cout << argv[optind] << std::endl;
 }
 endsnippet
 
 snippet fora "for range auto loop (fora)"
-for( auto&& ${2:element} : ${1:container} ){
-    ${VISUAL}${0}
+for( auto&& ${2:element} : ${1:container} )
+{
+	${VISUAL}${0}
 }
-
 endsnippet
 
+snippet once "Include header once only guard"
+#ifndef ${1:`!p
+if not snip.c:
+	import random, string
+	name = re.sub(r'[^A-Za-z0-9]+','_', snip.fn).upper()
+	rand = ''.join(random.sample(string.ascii_letters+string.digits, 8))
+	snip.rv = ('%s_%s' % (name,rand)).upper()
+else:
+    snip.rv = snip.c`}
+#define $1
+
+${0}
+
+#endif /* end of include guard: $1 */
+
+endsnippet
 
 # vim:ft=snippets:

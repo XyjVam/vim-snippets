@@ -493,9 +493,10 @@ auto ${1:name} =
 endsnippet
 
 snippet fung "general function"
-${1:type} ${2:function_name}(${3:int arg1}){
-		${VISUAL}${0:${VISUAL/(.*)/(?1::\/* code *\/)/}}
-		return ${4:0};
+${1:type} ${2:function_name}(${3:int arg1})
+{
+	${VISUAL}${0:${VISUAL/(.*)/(?1::\/* code *\/)/}}
+	return ${4:0};
 }
 endsnippet
 
@@ -600,7 +601,7 @@ else:
     snip.rv = snip.c`}
 #define $1
 
-${0}
+${VISUAL}
 
 #endif /* end of include guard: $1 */
 
